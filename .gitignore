@@ -24,3 +24,9 @@ hs_err_pid*
 replay_pid*
 .idea/workspace.xml
 *.bin
+.gradle/6.1.1/executionHistory/executionHistory.lock
+*.lock
+*.properties
+*.xml
+*.iml
+.idea/.name
