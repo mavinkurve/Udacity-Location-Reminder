@@ -36,11 +36,14 @@
 
     <!-- Error strings -->
     <string name="geofence_unknown_error">Unknown error: the Geofence service is not available now.</string>
-    <string name="geofence_not_available">Geofence service is not available now. Go to Settings>Location>Mode and choose High accuracy.</string>
-    <string name="geofence_too_many_geofences">Your app has registered too many geofences.</string>
-    <string name="geofence_too_many_pending_intents">You have provided too many PendingIntents to the addGeofences() call.</string>
-    <string name="error_adding_geofence">Error Happened, Can\'t Add Geofence</string>
+    <string name="geofence_not_available">Geofence service is not available now. Go to Settings >
+        Location > Mode and choose High accuracy.</string>
+    <string name="error_adding_geofence">Error while adding Geofence</string>
     <string name="login_button_text">Login</string>
     <string name="logout_text">Logout</string>
-    <string name="LoadingText">Loading..</string>
+    <string name="loading_text">Loading..</string>
+    <string name="successful_GeoFence_Activation_message">GeoFenching Activated</string>
+    <string name="failed_Geofence_Activation_Message">"GeoFencing Failed "</string>
+    <string name="permission_requirement_text">This app needs location permissions to work correctly. Please grant permissions.</string>
+    <string name="user_permission_acceptance_string">Enable</string>
 </resources>
