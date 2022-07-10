@@ -21,7 +21,7 @@ import com.udacity.project4.locationreminders.data.local.RemindersDao
 import com.udacity.project4.locationreminders.data.local.RemindersDatabase
 import com.udacity.project4.locationreminders.data.local.RemindersLocalRepository
 import com.udacity.project4.locationreminders.savereminder.SaveReminderViewModel
-import com.udacity.project4.util.TestConstants
+import com.udacity.project4.utils.TestConstants
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
@@ -97,7 +97,8 @@ class ReminderListFragmentTest :KoinTest {
     @Test
     fun reminderListFragment_UITest() = runBlockingTest  {
         //GIVEN
-        val reminder  = ReminderDTO(TestConstants.TITLE,
+        val reminder = ReminderDTO(
+            TestConstants.TITLE,
             TestConstants.DESCRIPTION,
             TestConstants.LOCATION,
             TestConstants.LATITUDE,

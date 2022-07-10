@@ -22,7 +22,7 @@ import com.udacity.project4.locationreminders.reminderslist.RemindersListViewMod
 import com.udacity.project4.locationreminders.savereminder.SaveReminderViewModel
 import com.udacity.project4.util.DataBindingIdlingResource
 import com.udacity.project4.util.EspressoIdlingResource
-import com.udacity.project4.util.TestConstants
+import com.udacity.project4.utils.TestConstants
 import com.udacity.project4.util.monitorActivity
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -128,7 +128,8 @@ class RemindersActivityTest :
     @Test
     fun verifySavedReminderShowsUp() = runBlocking {
         //Add reminder to repository
-        val reminder = ReminderDTO(TestConstants.TITLE,
+        val reminder = ReminderDTO(
+            TestConstants.TITLE,
             TestConstants.DESCRIPTION,
             TestConstants.LOCATION,
             TestConstants.LATITUDE,

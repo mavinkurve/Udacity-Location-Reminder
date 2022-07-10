@@ -6,6 +6,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.SmallTest;
 import com.udacity.project4.locationreminders.data.dto.ReminderDTO
+import com.udacity.project4.utils.TestConstants
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -38,11 +39,12 @@ class RemindersDaoTest {
     @Test
     fun verifyCanSaveReminder() = runBlockingTest {
         // GIVEN
-        val reminder = ReminderDTO("Test Reminder Title",
-            "Test Reminder Description",
-            "Test Reminder Location",
-            1.0,
-            1.0)
+        val reminder = ReminderDTO(
+            TestConstants.TITLE,
+            TestConstants.DESCRIPTION,
+            TestConstants.LOCATION,
+            TestConstants.LATITUDE,
+            TestConstants.LONGITUDE)
         database.reminderDao().saveReminder(reminder)
 
         // WHEN

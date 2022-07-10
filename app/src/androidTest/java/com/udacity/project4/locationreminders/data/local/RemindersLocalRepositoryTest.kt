@@ -7,6 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.udacity.project4.locationreminders.data.dto.ReminderDTO
 import com.udacity.project4.locationreminders.data.dto.Result
+import com.udacity.project4.utils.TestConstants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -45,11 +46,11 @@ class RemindersLocalRepositoryTest {
     @Test
     fun verifyRepositorySavesReminder() = runBlocking {
         // GIVEN
-        val reminder = ReminderDTO("Test Reminder Title",
-            "Test Reminder Description",
-            "Test Reminder Location",
-            1.0,
-            1.0)
+        val reminder = ReminderDTO(  TestConstants.TITLE,
+            TestConstants.DESCRIPTION,
+            TestConstants.LOCATION,
+            TestConstants.LATITUDE,
+            TestConstants.LONGITUDE)
         database.reminderDao().saveReminder(reminder)
 
         // WHEN
@@ -62,10 +63,8 @@ class RemindersLocalRepositoryTest {
     }
 
     @Test
-    fun noReminder_ReturnError() = runBlocking {
-        //removing all reminders
+    fun verifyEmptyRepositoryReturnsError() = runBlocking {
         repository.deleteAllReminders()
-        //getting back the error as there is no reminder
         val repoSaveReminder: Result<ReminderDTO> = repository.getReminder("1")
         val result: String? = (repoSaveReminder as Result.Error).message
 

@@ -1,4 +1,4 @@
-package com.udacity.project4.util
+package com.udacity.project4.utils
 
 object TestConstants {
     const val TITLE = "Test Reminder Title"
