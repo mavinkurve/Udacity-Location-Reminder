@@ -77,11 +77,8 @@ class SaveReminderFragment : BaseFragment() {
                 longitude
 
             )
-
-            //instead of saving directly first validate data and check for permission
             if(_viewModel.validateEnteredData(reminderDataItem!!))
                 checkPermission(reminderDataItem!!)
-
         }
 
     }
@@ -115,7 +112,7 @@ class SaveReminderFragment : BaseFragment() {
                             Manifest.permission.ACCESS_FINE_LOCATION)
                 )
 
-        val backgroudPermissionsApproved = (
+        val backgroundPermissionsApproved = (
                 if(runningQOrLater)
                 {
                     PackageManager.PERMISSION_GRANTED==
@@ -126,7 +123,7 @@ class SaveReminderFragment : BaseFragment() {
                     true
                 )
 
-        return foregroundPermissionsApproved && backgroudPermissionsApproved
+        return foregroundPermissionsApproved && backgroundPermissionsApproved
     }
 
     private fun requestForegroundAndBackgroundPermissions(){
@@ -235,14 +232,13 @@ class SaveReminderFragment : BaseFragment() {
     }
 
     companion object {
-        val REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE = 111
-        val REQUEST_FOREGROUND_ONLY_PERMISSION_REQUEST_CODE  = 222
-        val REQUEST_TURN_DEVICE_LOCATION_ON = 333
-        private const val TAG = "SaveReminderFragment"
-        private const val LOCATION_PERMISSION_INDEX = 0
-        private const val BACKGROUND_LOCATION_PERMISSION_INDEX = 1
+        const val REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE = 111
+        const val REQUEST_FOREGROUND_ONLY_PERMISSION_REQUEST_CODE  = 222
+        const val REQUEST_TURN_DEVICE_LOCATION_ON = 333
+        const val TAG = "SaveReminderFragment"
+        const val LOCATION_PERMISSION_INDEX = 0
+        const val BACKGROUND_LOCATION_PERMISSION_INDEX = 1
         const val ACTION_GEOFENCE_EVENT = "com.udacity.project4.locationreminders.GEOFENCING_EVENT"
-
     }
 
 }

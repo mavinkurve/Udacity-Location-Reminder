@@ -7,7 +7,7 @@
     <string name="reminder_desc">Description</string>
     <string name="reminder_location">Reminder Location</string>
     <string name="save">Save</string>
-    <string name="reminder_saved">Reminder Saved !</string>
+    <string name="reminder_saved">Reminder Saved!</string>
     <string name="logout">Logout</string>
     <string name="welcome_to_the_location_reminder_app">Welcome to the location reminder app</string>
     <string name="login">Login</string>
@@ -31,8 +31,8 @@
     <string name="select_location">Please select location</string>
     <string name="geofences_not_added">Problem in adding geofences.</string>
     <string name="welcome">Welcome</string>
-    <string name="err_enter_title">Please enter title</string>
-    <string name="err_select_location">Please select location</string>
+    <string name="error_prompt_no_title">Please enter title</string>
+    <string name="error_prompt_no_location">Please select location</string>
 
     <!-- Error strings -->
     <string name="geofence_unknown_error">Unknown error: the Geofence service is not available now.</string>
@@ -42,7 +42,7 @@
     <string name="login_button_text">Login</string>
     <string name="logout_text">Logout</string>
     <string name="loading_text">Loading..</string>
-    <string name="successful_GeoFence_Activation_message">GeoFenching Activated</string>
+    <string name="successful_GeoFence_Activation_message">GeoFencing Activated</string>
     <string name="failed_Geofence_Activation_Message">"GeoFencing Failed "</string>
     <string name="permission_requirement_text">This app needs location permissions to work correctly. Please grant permissions.</string>
     <string name="user_permission_acceptance_string">Enable</string>

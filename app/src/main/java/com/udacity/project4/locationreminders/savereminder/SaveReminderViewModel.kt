@@ -4,37 +4,32 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.app.PendingIntent
 import android.content.Intent
-import android.text.BoringLayout
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.PointOfInterest
-import com.google.android.material.snackbar.Snackbar
 import com.udacity.project4.R
-import com.udacity.project4.authentication.FirebaseUserLiveData
 import com.udacity.project4.base.BaseViewModel
 import com.udacity.project4.base.NavigationCommand
-import com.udacity.project4.locationreminders.RemindersActivity
 import com.udacity.project4.locationreminders.data.ReminderDataSource
 import com.udacity.project4.locationreminders.data.dto.ReminderDTO
 import com.udacity.project4.locationreminders.geofence.GeofenceBroadcastReceiver
 import com.udacity.project4.locationreminders.reminderslist.ReminderDataItem
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.dsl.ATTRIBUTE_VIEW_MODEL
 
 class SaveReminderViewModel(val app: Application, val dataSource: ReminderDataSource) :
     BaseViewModel(app) {
 
+    private val TAG = "SaveReminderViewModel"
+
     private var geofencingClient: GeofencingClient = LocationServices.getGeofencingClient(app.applicationContext)
 
-    private val goeFencingPendingIntent by lazy{
+    private val geoFencingPendingIntent by lazy{
         val intent = Intent(app, GeofenceBroadcastReceiver::class.java)
         intent.action = SaveReminderFragment.ACTION_GEOFENCE_EVENT
         PendingIntent.getBroadcast(app.applicationContext ,0,intent, PendingIntent.FLAG_UPDATE_CURRENT)
@@ -88,9 +83,6 @@ class SaveReminderViewModel(val app: Application, val dataSource: ReminderDataSo
 
     }
 
-
-
-
     /**
      * Save the reminder to the data source
      */
@@ -108,7 +100,7 @@ class SaveReminderViewModel(val app: Application, val dataSource: ReminderDataSo
                 )
             )
             showLoading.value = false
-            showToast.value = app.getString(R.string.reminder_saved)
+            showSnackBarInt.value = R.string.reminder_saved
             navigationCommand.value = NavigationCommand.Back
         }
     }
@@ -118,12 +110,12 @@ class SaveReminderViewModel(val app: Application, val dataSource: ReminderDataSo
      */
     fun validateEnteredData(reminderData: ReminderDataItem): Boolean {
         if (reminderData.title.isNullOrEmpty()) {
-            showSnackBarInt.value = R.string.err_enter_title
+            showSnackBarInt.value = R.string.error_prompt_no_title
             return false
         }
 
         if (reminderData.location.isNullOrEmpty()) {
-            showSnackBarInt.value = R.string.err_select_location
+            showSnackBarInt.value = R.string.error_prompt_no_location
             return false
         }
         return true
@@ -149,16 +141,16 @@ class SaveReminderViewModel(val app: Application, val dataSource: ReminderDataSo
         }.build()
 
 
-        geofencingClient.addGeofences(geofencingRequest,goeFencingPendingIntent)?.run {
+        geofencingClient.addGeofences(geofencingRequest,geoFencingPendingIntent)?.run {
             addOnSuccessListener {
-                Log.i("myTag","Success!! Geofencing Activated")
-                showSnackBar.value = app.applicationContext.getString(R.string.successful_GeoFence_Activation_message)
+                Log.i(TAG,"Success!! Geofencing Activated")
+                //showSnackBar.value = app.applicationContext.getString(R.string.successful_GeoFence_Activation_message)
                 //we are sure here that all location permission is enabled
                 validateAndSaveReminder(reminderData)
 
             }
             addOnFailureListener{
-                Log.i("myTag","Failed!! Geofencing Failed")
+                Log.i(TAG,"Failed!! Geofencing Failed")
                 showSnackBar.value =app.applicationContext.getString(R.string.failed_Geofence_Activation_Message)
 
             }

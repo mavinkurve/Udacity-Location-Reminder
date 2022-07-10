@@ -25,6 +25,42 @@ import org.junit.Test
 @SmallTest
 class RemindersDaoTest {
 
-//    TODO: Add testing implementation to the RemindersDao.kt
+    @get: Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
+    private lateinit var database: RemindersDatabase
 
+    @Before
+    fun initDb() {
+        database = Room.inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(),
+            RemindersDatabase::class.java).allowMainThreadQueries().build()
+    }
+
+    @Test
+    fun verifyCanSaveReminder() = runBlockingTest {
+        // GIVEN
+        val reminder = ReminderDTO("Test Reminder Title",
+            "Test Reminder Description",
+            "Test Reminder Location",
+            1.0,
+            1.0)
+        database.reminderDao().saveReminder(reminder)
+
+        // WHEN
+        val reminderDTO = database.reminderDao().getReminderById(reminder.id)
+
+        // THEN
+        assertThat<ReminderDTO>(reminderDTO as ReminderDTO, notNullValue())
+        assertThat(reminderDTO.id, `is`(reminder.id))
+        assertThat(reminderDTO.title, `is`(reminder.title))
+        assertThat(reminderDTO.description, `is`(reminder.description))
+        assertThat(reminderDTO.location, `is`(reminder.location))
+        assertThat(reminderDTO.latitude, `is`(reminder.latitude))
+        assertThat(reminderDTO.longitude, `is`(reminder.longitude))
+    }
+
+    @After
+    fun closeDb() = runBlockingTest {
+        database.reminderDao().deleteAllReminders()
+        database.close()
+    }
 }
